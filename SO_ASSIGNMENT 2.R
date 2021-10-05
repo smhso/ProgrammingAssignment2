@@ -8,15 +8,15 @@ SO <- function(a = matrix()) {
     a <<- b
     karugtong <<- NULL
   }
-  G <- function() {a}
-  SI <- function(inverse) {karugtong <<- inverse}
-  GI <- function() { karugtong }
-  list(tama=tama, G=G, SI=SI, GI=GI)
+  L <- function() {a}
+  TI <- function(inverse) {karugtong <<- inverse}
+  FI <- function() { karugtong }
+  list(tama=tama, L=L, TI=TI, FI=FI)
 }
 
 SOLVE_CACHE_SO <- function(a, ... ) {
   
-  karugtong <-  a$GI()
+  karugtong <-  a$FI()
   
   if (!is.null (karugtong)) {
     message("invalid.")
@@ -25,10 +25,9 @@ SOLVE_CACHE_SO <- function(a, ... ) {
     return(karugtong)
   }
   
-  synonym <- a$G()
+  synonym <- a$L()
   karugtong <- solve(synonym, ...)
   
   a$SI(karugtong)
   karugtong
 }
-
